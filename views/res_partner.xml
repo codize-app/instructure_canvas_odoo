@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_partner_page_canvas">
+            <field name="name">res.partner.form.canvas</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook>
+                        <page string="Canvas">
+                            <group>
+                            </group>
+                        </page>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>
