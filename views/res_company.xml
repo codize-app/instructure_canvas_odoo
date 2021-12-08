@@ -1,16 +1,32 @@
 <odoo>
     <data>
 
-        <record model="ir.ui.view" id="view_company_page_qm">
-            <field name="name">res.company.form.qm</field>
+        <record model="ir.ui.view" id="view_company_page_canvas">
+            <field name="name">res.company.form.canvas</field>
             <field name="model">res.company</field>
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
                 <data>
                     <notebook>
-                        <page string="QuadMinds">
+                        <page string="Instructure-Canvas">
+
+                            <div class="oe_button_box" name="button_box_canvas" style="width: auto;">
+            					<button name='canvas_test_connect' type="object"
+            					string="Probar Conexión"
+                                title="Probar Conexión"
+                                class="oe_stat_button"
+                                icon="fa-user-circle"/>
+
+                                <button name='canvas_import_users' type="object"
+            					string="Importar Usuarios"
+                                title="Importar Usuarios"
+                                class="oe_stat_button"
+                                icon="fa-cloud-download"/>
+                            </div>
+
                             <group>
-                                <field name="qm_apikey" groups="base.group_no_one" />
+                                <field name="canvas_url" />
+                                <field name="canvas_token" groups="base.group_no_one" />
                             </group>
                         </page>
                     </notebook>

@@ -1,4 +1,4 @@
-# Odoo QuadMinds Integration
-Odoo Connector with QuadMinds
+# Odoo Instructure Canvas Integration
+Odoo Connector with Instructure Canvas
 
 

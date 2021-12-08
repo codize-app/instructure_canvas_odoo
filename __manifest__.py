@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "QuadMinds Odoo Connector",
+    'name': "Instructure Canvas Odoo Connector",
 
     'summary': """
-        Connector Odoo-QuadMinds""",
+        Connector Odoo-Instructure Canvas""",
 
     'description': """
-        Connector Odoo-QuadMinds for Pickings
+        Connector Odoo-Instructure Canvas
     """,
 
     'author': "Codize",
@@ -15,11 +15,9 @@
     'category': 'Sales',
     'version': '0.1',
 
-    'depends': ['base', 'stock'],
+    'depends': ['base', 'sale'],
 
     'data': [
         'views/res_company.xml',
-        'views/res_partner.xml',
-        'views/stock_picking.xml',
     ]
 }
