@@ -12,14 +12,14 @@ import json
 import time
 from datetime import datetime
 
-class ResCompany(models.Model):
-    _inherit = 'res.company'
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
 
-    def canvas_test_connect(self):
-        raise ValidationError('Testing Canvas')
+    def update_to_canvas(self):
+        raise ValidationError('Función no permitida')
 
-    def canvas_import_users(self):
-        raise ValidationError('Importar Usuarios')
+    def create_in_canvas(self):
+        raise ValidationError('Función no permitida')
 
-    canvas_url = fields.Char(string='Canvas URL', help='This is the Canvas URL of site')
-    canvas_token = fields.Char(string='Canvas API Token', help='Canvas API Token')
+    canvas_id = fields.Integer('Canvas ID')
+    canvas_role = fields.Selection([('StudentEnrollment', 'Estudiante'),('TeacherEnrollment', 'Docente'),('TaEnrollment', 'TA'),('DesignerEnrollment', 'Diseñador'),('ObserverEnrollment','Observador')], 'Canvas Rol')

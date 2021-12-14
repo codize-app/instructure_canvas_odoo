@@ -9,7 +9,24 @@
                 <data>
                     <notebook>
                         <page string="Canvas">
+                            <div class="oe_button_box" name="button_box_canvas" style="width: auto;">
+                                                <button name='update_to_canvas' type="object"
+                                                string="Actualizar en Canvas"
+                                title="Actualizar en Canvas"
+                                class="oe_stat_button"
+                                icon="fa-user-circle"/>
+
+                                <button name='create_in_canvas' type="object"
+                                                string="Crear en Canvas"
+                                title="Crear en Canvas"
+                                class="oe_stat_button"
+                                icon="fa-cloud-upload"
+                                attrs="{'invisible': [('canvas_id', '!=', 0)]}"/>
+                            </div>
+
                             <group>
+                                <field name="canvas_id" />
+                                <field name="canvas_role" />
                             </group>
                         </page>
                     </notebook>
