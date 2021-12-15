@@ -14,7 +14,8 @@
                                                 string="Actualizar en Canvas"
                                 title="Actualizar en Canvas"
                                 class="oe_stat_button"
-                                icon="fa-user-circle"/>
+                                icon="fa-user-circle"
+                                attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
 
                                 <button name='create_in_canvas' type="object"
                                                 string="Crear en Canvas"

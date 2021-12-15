@@ -46,10 +46,11 @@ class ResCompany(models.Model):
 
     def process_user(self, r):
         for rec in r:
-            _logger.info(rec['name'])
-            partner = self.env['res.partner'].search([('email', '=', rec['email'])], limit='1')
-            if not partner:
-                _logger.info('Sin partner')
+            _logger.info(rec['id'])
+            if rec['login_id']:
+                partner = self.env['res.partner'].search([('email', '=', rec['login_id'])], limit='1')
+                if not partner:
+                    _logger.info('Sin partner')
 
     canvas_url = fields.Char(string='Canvas URL', help='This is the Canvas URL of site')
     canvas_token = fields.Char(string='Canvas API Token', help='Canvas API Token')

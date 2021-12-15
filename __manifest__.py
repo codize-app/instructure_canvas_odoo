@@ -15,10 +15,11 @@
     'category': 'Sales',
     'version': '0.1',
 
-    'depends': ['base', 'sale'],
+    'depends': ['base', 'sale', 'product'],
 
     'data': [
         'views/res_company.xml',
         'views/res_partner.xml',
+        'views/product_template.xml',
     ]
 }

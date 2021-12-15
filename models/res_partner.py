@@ -16,7 +16,18 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     def update_to_canvas(self):
-        raise ValidationError('Función no permitida')
+        _logger.info('Actualizando Usuario en Canvas')
+        company = self.env.user.company_id
+        headers = {
+            'Authorization': 'Bearer ' + company.canvas_token,
+        }
+
+        files = {
+            'user[name]': (None, self.name),
+            'user[email]': (None, self.email),
+        }
+
+        response = requests.put(company.canvas_url + '/api/v1/users/' + str(self.canvas_id) + '.json', headers=headers, files=files)
 
     def create_in_canvas(self):
         raise ValidationError('Función no permitida')

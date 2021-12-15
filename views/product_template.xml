@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="product_tpl_ml_form_view">
+          <field name="name">product.tpl.canvas.form.inherit</field>
+          <field name="model">product.template</field>
+          <field name="inherit_id" ref="product.product_template_only_form_view" />
+          <field name="arch" type="xml">
+             <label for="sale_ok" position="after">
+                  <field name="is_canvas_course" />
+                  <label for="is_canvas_course" />
+             </label>
+             <data>
+                <notebook>
+                    <page string="Canvas" attrs="{'invisible': [('is_canvas_course', '=', False)]}">
+
+		      <div class="oe_button_box" name="button_box_canvas" style="width: auto;">
+                          <button name='update_to_canvas' type="object"
+                                string="Actualizar en Canvas"
+                                title="Actualizar en Canvas"
+                                class="oe_stat_button"
+                                icon="fa-cloud-upload"
+                                attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
+                      </div>
+
+                      <group>
+			<field name="canvas_id" />
+		      </group>
+                    </page>
+                </notebook>
+             </data>
+          </field>
+        </record>
+
+    </data>
+</odoo>
