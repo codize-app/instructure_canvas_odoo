@@ -45,12 +45,17 @@ class ResCompany(models.Model):
             raise ValidationError('Conexión no establecida o falta de permisos. Contacte a su administrador. ' + response.text)
 
     def process_user(self, r):
+        imports = 0
         for rec in r:
-            _logger.info(rec['id'])
-            if rec['login_id']:
-                partner = self.env['res.partner'].search([('email', '=', rec['login_id'])], limit='1')
+            _logger.info(rec)
+            if 'login_id' in rec:
+                partner = self.env['res.partner'].search([('email', '=', rec['login_id'])], limit=1)
                 if not partner:
                     _logger.info('Sin partner')
+                    _logger.info(rec['name'])
+                    imports = imports + 1
+
+        raise ValidationError('Se importaron ' + str(imports) + ' Usuarios.')
 
     canvas_url = fields.Char(string='Canvas URL', help='This is the Canvas URL of site')
     canvas_token = fields.Char(string='Canvas API Token', help='Canvas API Token')
