@@ -9,26 +9,47 @@
                 <data>
                     <notebook>
                         <page string="Canvas">
-                            <div class="oe_button_box" name="button_box_canvas" style="width: auto;">
-                                                <button name='update_to_canvas' type="object"
-                                                string="Actualizar en Canvas"
-                                title="Actualizar en Canvas"
-                                class="oe_stat_button"
+                            <div class="oe_button_box mr-0 ml-0" name="button_box_canvas">
+                                <button name='update_to_canvas' type="object"
+                                string="Actualizar Datos"
+                                title="Actualiza los datos desde Odoo hacia Canvas, datos como el Nombre, el Email o el Rol"
+                                help="Actualiza los datos desde Odoo hacia Canvas, datos como el Nombre, el Email o el Rol"
+                                class="oe_stat_button mt-2"
                                 icon="fa-user-circle"
                                 attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
 
+                                <button name='link_course' type="object"
+                                string="Vincular Cursos"
+                                title="Vincula los Cursos asociados en Odoo para este Usuario en los Cursos de Canvas correspondientes"
+                                help="Vincula los Cursos asociados en Odoo para este Usuario en los Cursos de Canvas correspondientes"
+                                class="oe_stat_button mt-2"
+                                icon="fa-cloud-upload"
+                                attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
+
                                 <button name='create_in_canvas' type="object"
-                                                string="Crear en Canvas"
+                                string="Crear en Canvas"
                                 title="Crear en Canvas"
-                                class="oe_stat_button"
+                                class="oe_stat_button mt-2"
                                 icon="fa-cloud-upload"
                                 attrs="{'invisible': [('canvas_id', '!=', 0)]}"/>
                             </div>
-
+			<group>
                             <group>
                                 <field name="canvas_id" />
                                 <field name="canvas_role" />
                             </group>
+                            <group>
+                              <field name="canvas_course_ids" >
+                                <tree editable="bottom">
+                                    <control>
+                                        <create name="add_product_control" string="Agregar curso" />
+                                    </control>
+                                    <field name="is_canvas_course" invisible="1"/>
+                                    <field name="course" domain="[('is_canvas_course', '=', True)]"  options="{'no_create': True, 'no_open': True}"/>
+                                </tree>
+                              </field>
+                            </group>
+                          </group>
                         </page>
                     </notebook>
                 </data>

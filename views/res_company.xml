@@ -10,15 +10,15 @@
                     <notebook>
                         <page string="Instructure-Canvas">
 
-                            <div class="oe_button_box" name="button_box_canvas" style="width: auto;">
-            					<button name='canvas_test_connect' type="object"
-            					string="Probar Conexión"
+                            <div class="oe_button_box mr-0 ml-0" name="button_box_canvas">
+            			<button name='canvas_test_connect' type="object"
+            			string="Probar Conexión"
                                 title="Probar Conexión"
                                 class="oe_stat_button"
                                 icon="fa-user-circle"/>
 
                                 <button name='canvas_import_users' type="object"
-            					string="Importar Usuarios"
+            			string="Importar Usuarios"
                                 title="Importar Usuarios"
                                 class="oe_stat_button"
                                 icon="fa-cloud-download"/>

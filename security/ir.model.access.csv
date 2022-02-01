@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_andreani_odoo_andreani_odoo,andreani_odoo.andreani_odoo,model_andreani_odoo_andreani_odoo,,1,0,0,0
+access_res_partner_course_line,access_res_partner_course_line,model_res_partner_course_line,base.group_user,1,1,1,1
