@@ -30,18 +30,46 @@ class ResPartner(models.Model):
         response = requests.put(company.canvas_url + '/api/v1/users/' + str(self.canvas_id) + '.json', headers=headers, files=files)
 
     def create_in_canvas(self):
-        raise ValidationError('Función no permitida')
+        company = self.env.user.company_id
+        if self.email:
+            headers = {
+                'Authorization': 'Bearer ' + company.canvas_token,
+            }
+
+            files = {
+                'user[name]': (None, self.name),
+                'pseudonym[unique_id]': (None, self.email),
+                'pseudonym[sis_user_id]': (None, self.email)
+            }
+            response = requests.post(company.canvas_url + '/api/v1/accounts/1/users', files=files, headers=headers)
+            _logger.info(response.text)
+            _logger.info(response)
+            if response.status_code == 200:
+                _logger.info(response.text)
+                self.canvas_id = response.json()['id']
+            else:
+                raise ValidationError('Error ' + str(response.text))
+        else:
+            raise ValidationError('El Usuario debe tener un Mail')
 
     def link_course(self):
+        company = self.env.user.company_id
         if self.canvas_id != 0 and self.canvas_role != False:
+            headers = {
+                'Authorization': 'Bearer ' + company.canvas_token,
+            }
             files = {
                 'enrollment[user_id]': (None, str(self.canvas_id)),
                 'enrollment[type]': (None, self.canvas_role),
+                'enrollment[notify]': (None, True)
             }
 
             if self.canvas_course_ids:
                 for c in self.canvas_course_ids:
-                    response = requests.post(company.canvas_url + '/api/v1/courses/' + str(c.canvas_id) + '/enrollments', files=files)
+                    if c.course.canvas_id:
+                        response = requests.post(company.canvas_url + '/api/v1/courses/' + str(c.course.canvas_id) + '/enrollments', files=files, headers=headers)
+                        if response.status_code != 200:
+                            raise ValidationError('Error ' + str(response.text))
 
     canvas_id = fields.Integer('Canvas ID')
     canvas_role = fields.Selection([('StudentEnrollment', 'Estudiante'),('TeacherEnrollment', 'Docente'),('TaEnrollment', 'TA'),('DesignerEnrollment', 'Diseñador'),('ObserverEnrollment','Observador')], 'Canvas Rol')
