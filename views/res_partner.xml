@@ -26,6 +26,14 @@
                                 icon="fa-cloud-upload"
                                 attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
 
+                                <button name='link_observee' type="object"
+                                string="Vincular Observador"
+                                title="Vincula como abservador con los asociados en direcciones y contactos en Odoo"
+                                help="Vincula como abservador con los asociados en direcciones y contactos en Odooo"
+                                class="oe_stat_button mt-2"
+                                icon="fa-people-arrows-left-right"
+                                attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
+
                                 <button name='create_in_canvas' type="object"
                                 string="Crear en Canvas"
                                 title="Crear en Canvas"
