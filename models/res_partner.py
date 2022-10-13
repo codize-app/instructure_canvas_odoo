@@ -41,7 +41,14 @@ class ResPartner(models.Model):
                 'pseudonym[unique_id]': (None, self.email),
                 'pseudonym[sis_user_id]': (None, self.email)
             }
-            response = requests.post(company.canvas_url + '/api/v1/accounts/1/users', files=files, headers=headers)
+
+            if self.company_id:
+                account = self.company_id.canvas_account
+            else:
+                account = 1
+
+            _logger.info(company.canvas_url + '/api/v1/accounts/' + str(account) + '/users')
+            response = requests.post(company.canvas_url + '/api/v1/accounts/' + str(account) + '/users', files=files, headers=headers)
             _logger.info(response.text)
             _logger.info(response)
             if response.status_code == 200:
@@ -70,6 +77,28 @@ class ResPartner(models.Model):
                         response = requests.post(company.canvas_url + '/api/v1/courses/' + str(c.course.canvas_id) + '/enrollments', files=files, headers=headers)
                         if response.status_code != 200:
                             raise ValidationError('Error ' + str(response.text))
+
+    def unlink_courses(self):
+        company = self.env.user.company_id
+        if self.canvas_id != 0 and self.canvas_role != False:
+            headers = {
+                'Authorization': 'Bearer ' + company.canvas_token,
+            }
+
+            files = {
+                'task': (None, 'conclude'),
+            }
+
+            if self.canvas_course_ids:
+                response = requests.get(company.canvas_url + '/api/v1/users/' + str(self.canvas_id) + '/enrollments', headers=headers)
+                if response.status_code == 200:
+                    data = response.json()
+                    _logger.info(response.json())
+                    for en in data:
+                        response = requests.delete(company.canvas_url + '/api/v1/courses/' + str(en['course_id']) + '/enrollments/' + str(en['id']), files=files, headers=headers)
+                        if response.status_code != 200:
+                            raise ValidationError('Error ' + str(response.text))
+                    self.canvas_course_ids = False
 
     canvas_id = fields.Integer('Canvas ID')
     canvas_role = fields.Selection([('StudentEnrollment', 'Estudiante'),('TeacherEnrollment', 'Docente'),('TaEnrollment', 'TA'),('DesignerEnrollment', 'Diseñador'),('ObserverEnrollment','Observador')], 'Canvas Rol')

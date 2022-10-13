@@ -27,6 +27,7 @@
                             <group>
                                 <field name="canvas_url" />
                                 <field name="canvas_token" groups="base.group_no_one" />
+				<field name="canvas_account" />
                             </group>
                         </page>
                     </notebook>

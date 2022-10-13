@@ -59,3 +59,4 @@ class ResCompany(models.Model):
 
     canvas_url = fields.Char(string='Canvas URL', help='This is the Canvas URL of site')
     canvas_token = fields.Char(string='Canvas API Token', help='Canvas API Token')
+    canvas_account = fields.Integer(string='Canvas Account', help='Canvas ID Account, default main account 1', default=1)
