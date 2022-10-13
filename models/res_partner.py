@@ -29,6 +29,17 @@ class ResPartner(models.Model):
 
         response = requests.put(company.canvas_url + '/api/v1/users/' + str(self.canvas_id) + '.json', headers=headers, files=files)
 
+    def link_observee(self):
+        _logger.info('Vinculando observador en Canvas')
+        if self.canvas_id:
+            for contacto in self.child_ids:
+                if contacto.canvas_id != 0:
+                    company = self.env.user.company_id
+                    headers = {
+                        'Authorization': 'Bearer ' + company.canvas_token,
+                    }
+                    response = requests.put(company.canvas_url + '/api/v1/users/' + str(self.canvas_id) + '/observees/' + str(contacto.canvas_id), headers=headers)
+
     def create_in_canvas(self):
         company = self.env.user.company_id
         if self.email:

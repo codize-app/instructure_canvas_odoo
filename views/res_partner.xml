@@ -25,13 +25,18 @@
                                 class="oe_stat_button mt-2"
                                 icon="fa-cloud-upload"
                                 attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
-
                                 <button name='unlink_courses' type="object"
                                 string="Desvincular Cursos"
                                 title="Desvincula los Cursos asociados en Odoo para este Usuario en los Cursos de Canvas correspondientes"
                                 help="Desvincula los Cursos asociados en Odoo para este Usuario en los Cursos de Canvas correspondientes"
                                 class="oe_stat_button mt-2"
                                 icon="fa-cloud-upload"
+                                <button name='link_observee' type="object"
+                                string="Vincular Observador"
+                                title="Vincula como abservador con los asociados en direcciones y contactos en Odoo"
+                                help="Vincula como abservador con los asociados en direcciones y contactos en Odooo"
+                                class="oe_stat_button mt-2"
+                                icon="fa-users"
                                 attrs="{'invisible': [('canvas_id', '=', 0)]}"/>
 
                                 <button name='create_in_canvas' type="object"
