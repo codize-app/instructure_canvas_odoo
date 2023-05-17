@@ -87,6 +87,7 @@ class ResPartner(models.Model):
                     if c.course.canvas_id:
                         response = requests.post(company.canvas_url + '/api/v1/courses/' + str(c.course.canvas_id) + '/enrollments', files=files, headers=headers)
                         if response.status_code != 200:
+                            _logger.info(c.course.canvas_id)
                             raise ValidationError('Error ' + str(response.text))
 
     def unlink_courses(self):
@@ -105,10 +106,12 @@ class ResPartner(models.Model):
                 if response.status_code == 200:
                     data = response.json()
                     _logger.info(response.json())
-                    for en in data:
-                        response = requests.delete(company.canvas_url + '/api/v1/courses/' + str(en['course_id']) + '/enrollments/' + str(en['id']), files=files, headers=headers)
-                        if response.status_code != 200:
-                            raise ValidationError('Error ' + str(response.text))
+                    #for en in data:
+                    #    resDel = requests.delete(company.canvas_url + '/api/v1/courses/' + str(en['course_id']) + '/enrollments/' + str(en['id']), files=files, headers=headers)
+                    #    if resDel.status_code != 200:
+                    #        raise ValidationError('Error ' + str(response.text))
+                    #    else:
+                    #        _logger.info(resDel.json())
                     self.canvas_course_ids = False
 
     canvas_id = fields.Integer('Canvas ID')

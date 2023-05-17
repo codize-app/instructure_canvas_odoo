@@ -20,14 +20,12 @@ class ProductTemplate(models.Model):
         company = self.env.user.company_id
         headers = {
             'Authorization': 'Bearer ' + company.canvas_token,
+            'Content-Type': 'application/x-www-form-urlencoded',
         }
 
-        #files = {
-        #    'user[name]': (None, self.name),
-        #    'user[email]': (None, self.email),
-        #}
+        data = 'course[name]=' + self.name
 
-        #response = requests.put(company.canvas_url + '/api/v1/users/' + str(self.canvas_id) + '.json', headers=headers, files=files)
+        response = requests.put(company.canvas_url + '/api/v1/courses/' + str(self.canvas_id), headers=headers, data=data)
 
     is_canvas_course = fields.Boolean('Es un Curso Canvas')
     canvas_id = fields.Integer('Canvas ID')
